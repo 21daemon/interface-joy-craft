@@ -6,6 +6,7 @@ import { UserRole } from '@/types';
 
 interface Profile {
   id: string;
+  user_id: string;
   email: string;
   name: string;
   role: UserRole;
@@ -60,7 +61,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             const { data: profileData, error } = await supabase
               .from('profiles')
               .select('*')
-              .eq('id', session.user.id)
+              .eq('user_id', session.user.id)
               .maybeSingle();
             
             if (error) {
